@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="M.R.K — A calm, thoughtful presence. Reflections, moments, and a space to share." />
+  <meta name="description" content="KAUSHAL — Share your hidden story anonymously. Your secrets. No names. Just truth." />
   <meta name="theme-color" content="#f9fafb" />
-  <meta property="og:title" content="M.R.K — A Quiet Corner" />
-  <meta property="og:description" content="Clarity. Stillness. Depth." />
+  <meta property="og:title" content="KAUSHAL — A Safe Space For Untold Truths" />
+  <meta property="og:description" content="Your Secrets. No Names. Just Truth. Share your hidden story anonymously." />
   <meta property="og:type" content="website" />
-  <title>M.R.K</title>
+  <title>KAUSHAL — A Safe Space For Untold Truths</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -42,6 +42,9 @@
       --pad-v-mob:    80px;
       --tr:           0.4s;
       --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+      --green:        #22c55e;
+      --green-soft:   #16a34a;
+      --green-pale:   #f0fdf4;
     }
 
     /* =============================================
@@ -77,7 +80,7 @@
     html[data-theme="dark"] #hero {
       background: linear-gradient(135deg, #0b1220 0%, #131a2e 100%);
     }
-    html[data-theme="dark"] #reflections {
+    html[data-theme="dark"] #how-it-works {
       background: linear-gradient(180deg, #0f1929 0%, rgba(19,26,46,.5) 100%);
     }
     html[data-theme="dark"] #share {
@@ -952,8 +955,189 @@
     #soundBtn:focus-visible {
       outline-offset: 4px;
     }
-    .msg-textarea:focus-visible { outline: none; } /* handled by box-shadow */
+    .msg-textarea:focus-visible { outline: none; }
     .soc-link:focus-visible { border-radius: 50%; }
+
+    /* Green button */
+    .btn-green {
+      background: var(--green);
+      color: #fff;
+    }
+    .btn-green:hover {
+      background: var(--green-soft);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 22px rgba(34,197,94,.25);
+    }
+
+    /* =============================================
+       QUOTE SEPARATOR
+    ============================================= */
+    .quote-sep {
+      text-align: center;
+      padding: 64px var(--pad-h);
+      position: relative; z-index: 2;
+    }
+    .quote-sep blockquote {
+      font-size: clamp(17px, 2.2vw, 22px);
+      font-style: italic;
+      color: var(--text-3);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.7;
+      letter-spacing: .01em;
+    }
+    .quote-sep blockquote::before {
+      content: '\201C';
+      font-family: Georgia, serif;
+      font-size: 52px;
+      color: var(--accent);
+      opacity: .2;
+      display: block;
+      line-height: .8;
+      margin-bottom: 8px;
+    }
+
+    /* =============================================
+       HOW IT WORKS
+    ============================================= */
+    .step-number {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px;
+      background: var(--accent-pale);
+      color: var(--accent);
+      border-radius: 50%;
+      font-size: 16px; font-weight: 700;
+      margin-bottom: 18px;
+      flex-shrink: 0;
+    }
+    .step-highlight {
+      display: inline-block;
+      margin-top: 48px;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--accent);
+      opacity: .8;
+      border-left: 2px solid var(--accent);
+      padding-left: 16px;
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       ANONYMITY SECTION
+    ============================================= */
+    #anonymity {
+      background: var(--bg-alt);
+    }
+    html[data-theme="dark"] #anonymity {
+      background: #0a1118;
+    }
+    .anon-inner { max-width: 620px; margin: 0 auto; }
+    .anon-list {
+      list-style: none;
+      margin: 28px 0 0;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .anon-list li {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 16px; color: var(--text-2);
+    }
+    .anon-list li::before {
+      content: '✕';
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px;
+      background: rgba(220,38,38,.08);
+      color: #dc2626;
+      border-radius: 50%;
+      font-size: 11px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .anon-tag {
+      display: inline-block;
+      margin-top: 32px;
+      font-size: 14px;
+      color: var(--green-soft);
+      border: 1px solid rgba(34,197,94,.3);
+      background: rgba(34,197,94,.06);
+      border-radius: var(--radius-pill);
+      padding: 6px 18px;
+      letter-spacing: .02em;
+    }
+
+    /* =============================================
+       FORM SELECT & TOGGLE
+    ============================================= */
+    .form-select {
+      width: 100%;
+      background: rgba(255,255,255,.92);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 18px;
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--text);
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 18px center;
+      cursor: none;
+      transition: border-color var(--tr) var(--ease), box-shadow var(--tr) var(--ease);
+    }
+    .form-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37,99,235,.07);
+    }
+    html[data-theme="dark"] .form-select {
+      background-color: rgba(22,32,50,.9);
+      color: var(--text);
+    }
+    .advice-toggle-row {
+      display: flex; align-items: center;
+      gap: 12px; padding: 14px 0;
+    }
+    .advice-toggle-row label {
+      font-size: 14px; color: var(--text-2);
+      cursor: pointer; -webkit-user-select: none; user-select: none;
+    }
+    .toggle-switch {
+      position: relative; width: 38px; height: 22px;
+      flex-shrink: 0;
+    }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-slider {
+      position: absolute; inset: 0;
+      background: var(--border);
+      border-radius: 11px;
+      cursor: pointer;
+      transition: background var(--tr) var(--ease);
+    }
+    .toggle-slider::before {
+      content: '';
+      position: absolute; top: 3px; left: 3px;
+      width: 16px; height: 16px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,.2);
+      transition: transform var(--tr) var(--ease);
+    }
+    .toggle-switch input:checked + .toggle-slider { background: var(--green); }
+    .toggle-switch input:checked + .toggle-slider::before { transform: translateX(16px); }
+
+    /* =============================================
+       DISCLAIMER
+    ============================================= */
+    .footer-disclaimer {
+      width: 100%;
+      padding-top: 20px;
+      margin-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      font-size: 11px;
+      color: rgba(255,255,255,.28);
+      line-height: 1.7;
+      text-align: center;
+      max-width: 760px;
+      margin-left: auto; margin-right: auto;
+    }
 
     /* =============================================
        MOBILE NAV
@@ -1055,11 +1239,11 @@
        NAVIGATION
   ============================================================ -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
-    <a href="#hero" class="nav-logo">M.R.K</a>
+    <a href="#hero" class="nav-logo">KAUSHAL</a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#about">About</a></li>
-      <li><a href="#reflections">Reflections</a></li>
-      <li><a href="#moments">Moments</a></li>
+      <li><a href="#about">Why</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#moments">Stories</a></li>
       <li><a href="#share">Share</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:12px">
@@ -1276,16 +1460,17 @@
 
     <!-- RIGHT: Text -->
     <div class="hero-text">
-      <p class="hero-hello" id="hHello">Hello</p>
+      <p class="hero-hello" id="hHello">KAUSHAL — A Safe Space For Untold Truths</p>
       <h1 class="hero-headline" id="hHead">
-        Transform Your Life<br />With Clarity
+        Everyone Has Something<br />They Never Said Out Loud.
       </h1>
       <p class="hero-type-wrap" id="hType">
         <span class="typer" id="typerText"></span><span class="cursor-blink" aria-hidden="true"></span>
       </p>
+      <p style="font-size:13px;color:var(--text-3);margin-bottom:32px;font-style:italic;opacity:0;transform:translateY(10px);transition:opacity .6s var(--ease) 1.25s,transform .6s var(--ease) 1.25s" id="hHindi" class="in-ready">Dil halka karo. Pehchan rahegi gupt.</p>
       <div class="hero-ctas" id="hCtas">
-        <a href="#reflections" class="btn btn-dark">Read &amp; Reflect</a>
-        <a href="#share"       class="btn btn-outline">Share a Thought</a>
+        <a href="#share" class="btn btn-green">Share Your Secret</a>
+        <a href="#how-it-works" class="btn btn-outline">How It Works</a>
       </div>
     </div>
 
@@ -1302,87 +1487,57 @@
   <section id="about" class="section-pad">
     <div class="container">
       <div class="about-inner">
-        <p class="eyebrow reveal">Who I Am</p>
-        <h2 class="section-title reveal d1">A learner, first and always.</h2>
+        <p class="eyebrow reveal">Why This Exists</p>
+        <h2 class="section-title reveal d1">Because some things are too heavy to carry alone.</h2>
         <div class="about-rule reveal d2" aria-hidden="true"></div>
         <p class="reveal d2">
-          I have spent most of my life trying to understand things slowly — not in a hurry to arrive anywhere, but genuinely curious about what lies underneath. People, systems, ideas, emotions. I believe depth is more valuable than speed, and that the most important things can rarely be said in a single sentence.
+          Most of us walk around holding things we have never told anyone. Not because we don't want to — but because we are afraid of being judged, misunderstood, or dismissed. We rehearse conversations we never have. We carry weight that was never meant to be permanent.
         </p>
         <p class="reveal d3">
-          This space is not a highlight reel. It is a living conversation — with ideas that matter, with questions that don't have clean answers, and with anyone who finds something here that resonates. I write to process. I share to connect. I listen because I think most of us need to be heard far more than we are.
+          KAUSHAL is a space where you can put that weight down. Anonymously. Completely. Without fear. Share a regret, a confession, a question you are ashamed of, something that happened that you have never spoken about. No names. No profiles. No judgment.
         </p>
         <p class="reveal d4">
-          If you are here, I am glad. Take what is useful. Leave what isn't. And if something moves you — there is a space below for that, silently and safely.
+          I read everything. I think about everything. And when enough weight gathers around a particular kind of human experience, I talk about it — in a video, without revealing anyone. Because you are not the only one carrying this. You never were.
         </p>
       </div>
     </div>
   </section>
 
   <!-- ============================================================
-       REFLECTIONS
+       HOW IT WORKS
   ============================================================ -->
-  <section id="reflections" class="section-pad">
+  <section id="how-it-works" class="section-pad bg-alt">
     <div class="container">
       <div style="text-align:center;max-width:500px;margin:0 auto 64px">
-        <p class="eyebrow reveal">Reflections</p>
-        <h2 class="section-title reveal d1">Thoughts worth sitting with.</h2>
-        <p class="section-sub reveal d2" style="margin:14px auto 0">Unfinished thoughts. Open questions. Small truths.</p>
+        <p class="eyebrow reveal">How It Works</p>
+        <h2 class="section-title reveal d1">Simple. Safe. Human.</h2>
+        <p class="section-sub reveal d2" style="margin:14px auto 0">Three steps. No sign-up. No tracking. Just honesty.</p>
       </div>
 
       <div class="ref-grid">
 
-        <article class="ref-card reveal d1">
-          <div class="ref-icon">💡</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>Clarity is not the absence of complexity. It is the willingness to sit with complexity long enough that it begins to reveal its shape.</blockquote>
+        <article class="ref-card reveal d1" style="cursor:default">
+          <div class="step-number">1</div>
+          <div class="ref-icon">✍️</div>
+          <h3 style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;">You write your story.</h3>
+          <blockquote>Whatever you have been carrying — a regret, a confession, a question you are afraid to ask out loud. Write it here. As much or as little as you want. No name required. No account. Nothing that connects back to you.</blockquote>
+          <span class="step-highlight">Your words arrive as pure text. That is all.</span>
         </article>
 
-        <article class="ref-card reveal d2">
-          <div class="ref-icon">🌊</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>Most of what troubles us is not the situation itself, but the story we tell ourselves about what the situation means. Change the story. The situation softens.</blockquote>
+        <article class="ref-card reveal d2" style="cursor:default">
+          <div class="step-number">2</div>
+          <div class="ref-icon">🔒</div>
+          <h3 style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;">Your identity stays hidden.</h3>
+          <blockquote>Nothing in the system stores your name, your IP, your device, or any identifier. You are not a profile. You are not a data point. You are a human moment — and this space treats it as such.</blockquote>
+          <span class="step-highlight">Completely anonymous. By design, not just by policy.</span>
         </article>
 
-        <article class="ref-card reveal d3">
-          <div class="ref-icon">🌿</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>We talk about rest as if it needs to be earned. But the mind that never rests is not stronger — it is just louder. Silence is not emptiness. It is where you remember yourself.</blockquote>
-        </article>
-
-        <article class="ref-card reveal d1">
-          <div class="ref-icon">🤝</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>The most generous thing you can offer someone is your full presence — not your advice, not your solutions, but the rare and quiet gift of being truly seen.</blockquote>
-        </article>
-
-        <article class="ref-card reveal d2">
-          <div class="ref-icon">🌱</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>Growth rarely announces itself. It happens in the spaces between decisions — in what you choose not to say, in the patience you extend, in the moment you choose understanding over being right.</blockquote>
-        </article>
-
-        <article class="ref-card reveal d3">
-          <div class="ref-icon">🔭</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>There is a profound courage in not knowing. In holding an open question tenderly, instead of rushing toward a comfortable answer that doesn't fit.</blockquote>
-        </article>
-
-        <article class="ref-card reveal d2">
-          <div class="ref-icon">🧭</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>You do not find your purpose by looking for it. You notice it — in what moves you quietly, in what angers you deeply, in what you return to even when no one is watching.</blockquote>
-        </article>
-
-        <article class="ref-card reveal d3">
-          <div class="ref-icon">⚡</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>Maturity is not about having answers. It is about learning to ask better questions, and becoming comfortable in the time it takes to receive an honest one.</blockquote>
-        </article>
-
-        <article class="ref-card reveal d4">
-          <div class="ref-icon">☀️</div>
-          <span class="ref-mark" aria-hidden="true">&ldquo;</span>
-          <blockquote>Every moment of genuine stillness is an act of resistance. In a world addicted to noise, choosing quiet is not avoidance — it is the deepest form of attention.</blockquote>
+        <article class="ref-card reveal d3" style="cursor:default">
+          <div class="step-number">3</div>
+          <div class="ref-icon">🎙️</div>
+          <h3 style="font-size:18px;font-weight:600;color:var(--text);margin-bottom:12px;">I discuss it in a video.</h3>
+          <blockquote>When patterns emerge — when many people share versions of the same weight — I talk about it on YouTube. Thoughtfully. Without revealing anyone. Because these are not just your questions. They belong to all of us.</blockquote>
+          <span class="step-highlight">No names. No shame. Just understanding.</span>
         </article>
 
       </div>
@@ -1392,12 +1547,44 @@
   <!-- ============================================================
        MOMENTS / VIDEOS
   ============================================================ -->
+  <!-- Quote separator -->
+  <div class="quote-sep">
+    <blockquote class="reveal">The things we never say out loud are often the things that shape us most.</blockquote>
+  </div>
+
+  <!-- Anonymity Guarantee -->
+  <section id="anonymity" class="section-pad">
+    <div class="container">
+      <div class="anon-inner">
+        <p class="eyebrow reveal">Anonymity Guarantee</p>
+        <h2 class="section-title reveal d1">We collect nothing. We store nothing.</h2>
+        <p class="section-sub reveal d2">This is not a promise buried in a terms of service. This is the architecture.</p>
+        <ul class="anon-list reveal d3">
+          <li>No name, username, or handle required</li>
+          <li>No email address collected</li>
+          <li>No IP address logged or stored</li>
+          <li>No cookies or tracking scripts</li>
+          <li>No account. No profile. No history.</li>
+        </ul>
+        <span class="anon-tag reveal d4">✓ Your message arrives as text only — nothing attached, nothing traceable.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote separator -->
+  <div class="quote-sep">
+    <blockquote class="reveal">Shame thrives in silence. But silence is not the only alternative to public confession.</blockquote>
+  </div>
+
+  <!-- ============================================================
+       MOMENTS / VIDEOS
+  ============================================================ -->
   <section id="moments" class="section-pad">
     <div class="container">
       <div style="text-align:center;max-width:500px;margin:0 auto 64px">
-        <p class="eyebrow reveal">Moments</p>
+        <p class="eyebrow reveal">Watch Real Stories</p>
         <h2 class="section-title reveal d1">Conversations worth returning to.</h2>
-        <p class="section-sub reveal d2" style="margin:14px auto 0">Curated videos that shaped how I see the world.</p>
+        <p class="section-sub reveal d2" style="margin:14px auto 0">Real human experiences — discussed thoughtfully, anonymously, on YouTube.</p>
       </div>
       <div class="vid-grid">
         <div class="vid-card reveal d1">
@@ -1428,8 +1615,17 @@
           </div>
         </div>
       </div>
+      <div style="text-align:center;margin-top:44px" class="reveal d4">
+        <a href="#share" class="btn btn-green" style="margin-right:12px">Share Your Story</a>
+        <a href="#" class="btn btn-outline" rel="noopener noreferrer" aria-label="Subscribe on YouTube">Subscribe on YouTube</a>
+      </div>
     </div>
   </section>
+
+  <!-- Quote separator -->
+  <div class="quote-sep">
+    <blockquote class="reveal">You are not broken. You are human. And that has always been enough.</blockquote>
+  </div>
 
   <!-- ============================================================
        SHARE
@@ -1438,24 +1634,41 @@
     <div class="container">
       <div class="share-inner">
         <div style="text-align:center;margin-bottom:48px">
-          <p class="eyebrow reveal">Share Anything</p>
-          <h2 class="section-title reveal d1">This space belongs to you.</h2>
-          <p class="section-sub reveal d2" style="margin:14px auto 0">Write whatever is on your mind. A question, a feeling, something you've been carrying.</p>
+          <p class="eyebrow reveal">Tell Me</p>
+          <h2 class="section-title reveal d1">Tell me what you've never told anyone.</h2>
+          <p class="section-sub reveal d2" style="margin:14px auto 0">A regret. A confession. A question you carry in silence. This space was built to hold it.</p>
           <div class="anon-pill reveal d2">
             <span class="anon-dot" aria-hidden="true"></span>
             Fully anonymous — no name, no email, no trace.
           </div>
         </div>
 
-        <div id="msgForm" class="msg-form reveal d3" role="form" aria-label="Anonymous message form">
+        <div id="msgForm" class="msg-form reveal d3" role="form" aria-label="Anonymous confession form">
+          <select id="msgCategory" class="form-select" aria-label="Category">
+            <option value="" disabled selected>What is this about? (optional)</option>
+            <option value="Regret">A Regret</option>
+            <option value="Relationship">A Relationship</option>
+            <option value="Family">Family</option>
+            <option value="Money">Money</option>
+            <option value="Career">Career</option>
+            <option value="Secret">A Secret I've Never Told Anyone</option>
+            <option value="Other">Something Else</option>
+          </select>
           <textarea id="msgInput" class="msg-textarea"
-            placeholder="Write freely. This is a safe space."
+            placeholder="Write freely. No one will judge you here."
             rows="7" maxlength="2000" aria-label="Your message"></textarea>
           <p class="char-counter" id="charCounter">0 / 2000</p>
+          <div class="advice-toggle-row">
+            <label class="toggle-switch" for="adviceToggle">
+              <input type="checkbox" id="adviceToggle">
+              <span class="toggle-slider"></span>
+            </label>
+            <label for="adviceToggle">I'd like a perspective on this in a video (still anonymous)</label>
+          </div>
           <span class="form-err" id="formErr" role="alert" aria-live="polite"></span>
           <div class="form-row">
             <p class="form-note">No personal data is collected or stored.</p>
-            <button type="button" class="btn btn-dark" id="sendBtn" aria-label="Send anonymously">
+            <button type="button" class="btn btn-green" id="sendBtn" aria-label="Send anonymously">
               Send Anonymously
             </button>
           </div>
@@ -1489,7 +1702,7 @@
        FOOTER
   ============================================================ -->
   <footer role="contentinfo">
-    <p class="footer-txt">Built with intention. &copy; M.R.K</p>
+    <p class="footer-txt">Built with intention. &copy; KAUSHAL</p>
     <div class="social-row">
       <a href="#" class="soc-link" aria-label="Twitter" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -1498,6 +1711,9 @@
         <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
     </div>
+    <p class="footer-disclaimer">
+      KAUSHAL is an anonymous sharing space. All submissions are voluntary, confidential, and used only for thoughtful discussion. No identifying information is collected, stored, or shared. This platform does not provide professional mental health advice. If you are in crisis, please reach out to a qualified professional or a crisis helpline in your country.
+    </p>
   </footer>
 
   <!-- ============================================================
@@ -1530,7 +1746,7 @@
     document.addEventListener('mousedown', () => ring.classList.add('click'));
     document.addEventListener('mouseup',   () => ring.classList.remove('click'));
 
-    document.querySelectorAll('a,button,.ref-card,.vid-card,textarea,[role=button]')
+    document.querySelectorAll('a,button,.ref-card,.vid-card,textarea,select,[role=button]')
       .forEach(el => {
         el.addEventListener('mouseenter', () => ring.classList.add('over'));
         el.addEventListener('mouseleave', () => ring.classList.remove('over'));
@@ -1563,11 +1779,13 @@
       const el = document.getElementById(id);
       if (el) setTimeout(() => el.classList.add('in'), 60);
     });
+    const hindi = document.getElementById('hHindi');
+    if (hindi) setTimeout(() => { hindi.style.opacity = '1'; hindi.style.transform = 'none'; }, 60);
   })();
 
   /* ── Typing effect ─────────────────────────────────── */
   (function() {
-    const words = ['Think clearly.', 'Decide confidently.', 'Move intentionally.', 'Act with depth.', 'Choose stillness.'];
+    const words = ['No name. No judgment.', 'Your secret stays secret.', 'Someone is ready to listen.', 'Say what you\'ve never said.', 'This space is yours.'];
     const el    = document.getElementById('typerText');
     if (!el) return;
     let wi = 0, ci = 0, deleting = false;
@@ -1647,6 +1865,7 @@
 
   /* ── Card 3D tilt ──────────────────────────────────── */
   document.querySelectorAll('.ref-card').forEach(card => {
+    if (card.querySelector('.step-number')) return; // skip How It Works cards
     const MAX = 7;
     card.addEventListener('mousemove', e => {
       const r  = card.getBoundingClientRect();
@@ -1753,14 +1972,16 @@
   }
 
   sendBtn.addEventListener('click', async () => {
-    const msg = msgInput.value.trim();
+    const msg      = msgInput.value.trim();
+    const category = document.getElementById('msgCategory') ? document.getElementById('msgCategory').value : '';
+    const advice   = document.getElementById('adviceToggle') ? document.getElementById('adviceToggle').checked : false;
     if (!msg)         { showErr('Please write something before sending.'); msgInput.focus(); return; }
     if (msg.length < 3) { showErr('Your message is too short. Take your time.'); return; }
     sendBtn.textContent = 'Sending\u2026';
     sendBtn.disabled    = true;
     try {
       if (typeof emailjs !== 'undefined') {
-        await emailjs.send(EJS_SVC, EJS_TPL, { message: msg });
+        await emailjs.send(EJS_SVC, EJS_TPL, { message: msg, category: category || 'Not specified', wants_perspective: advice ? 'Yes' : 'No' });
       } else {
         await new Promise(r => setTimeout(r, 800));
       }
@@ -1919,6 +2140,8 @@
     }
 
     document.querySelectorAll('.ref-card').forEach(card => {
+      // Skip How It Works cards (they contain a step-number)
+      if (card.querySelector('.step-number')) return;
       card.style.cursor = 'none';
       card.setAttribute('tabindex', '0');
       card.setAttribute('role', 'button');
