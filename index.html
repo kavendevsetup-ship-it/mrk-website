@@ -678,19 +678,91 @@
        ABOUT
     ============================================= */
     #about { background: var(--bg); }
-    .about-inner { max-width: 640px; margin: 0 auto; }
-    .about-inner .section-title { margin-bottom: 32px; }
-    .about-inner p {
+    .about-inner {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+    .about-text {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+    .about-text .section-title { margin-bottom: 32px; }
+    .about-text p {
       font-size: 17px;
       color: var(--text-2);
       line-height: 1.85;
       margin-bottom: 24px;
     }
-    .about-inner p:last-child { margin-bottom: 0; }
+    .about-text p:last-child { margin-bottom: 0; }
     .about-rule {
       width: 36px; height: 2px;
       background: linear-gradient(90deg, var(--accent), transparent);
       border-radius: 2px; margin: 32px 0;
+    }
+    /* Image column */
+    .about-img-wrap {
+      flex: 0 0 340px;
+      width: 340px;
+      position: relative;
+    }
+    .about-img-glow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(ellipse at 50% 50%,
+        rgba(37,99,235,.07) 0%,
+        rgba(37,99,235,.03) 45%,
+        transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .about-img-wrap img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 360px;
+      border-radius: 16px;
+      box-shadow: 0px 20px 40px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+      display: block;
+      transition: transform var(--tr) var(--ease), box-shadow var(--tr) var(--ease);
+      will-change: transform;
+    }
+    /* Float animation on inner wrapper — keeps hover transform clean */
+    .about-img-float {
+      animation: photoFloat 7s ease-in-out infinite;
+    }
+    .about-img-float:hover img {
+      transform: scale(1.02);
+      box-shadow: 0px 28px 52px rgba(0,0,0,0.12), 0 6px 18px rgba(0,0,0,0.06);
+    }
+    html[data-theme="dark"] .about-img-wrap img {
+      box-shadow: 0px 20px 48px rgba(0,0,0,0.35), 0 4px 14px rgba(0,0,0,0.2);
+    }
+    html[data-theme="dark"] .about-img-glow {
+      background: radial-gradient(ellipse at 50% 50%,
+        rgba(96,165,250,.08) 0%,
+        rgba(96,165,250,.03) 45%,
+        transparent 70%);
+    }
+    @keyframes photoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-10px); }
+    }
+    /* Mobile: stack image above text */
+    @media (max-width: 860px) {
+      .about-inner {
+        flex-direction: column-reverse;
+        gap: 40px;
+        text-align: left;
+      }
+      .about-img-wrap {
+        flex: none;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+      }
     }
 
     /* =============================================
@@ -1487,18 +1559,31 @@
   <section id="about" class="section-pad">
     <div class="container">
       <div class="about-inner">
-        <p class="eyebrow reveal">Why This Exists</p>
-        <h2 class="section-title reveal d1">Because some things are too heavy to carry alone.</h2>
-        <div class="about-rule reveal d2" aria-hidden="true"></div>
-        <p class="reveal d2">
-          Most of us walk around holding things we have never told anyone. Not because we don't want to — but because we are afraid of being judged, misunderstood, or dismissed. We rehearse conversations we never have. We carry weight that was never meant to be permanent.
-        </p>
-        <p class="reveal d3">
-          KAUSHAL is a space where you can put that weight down. Anonymously. Completely. Without fear. Share a regret, a confession, a question you are ashamed of, something that happened that you have never spoken about. No names. No profiles. No judgment.
-        </p>
-        <p class="reveal d4">
-          I read everything. I think about everything. And when enough weight gathers around a particular kind of human experience, I talk about it — in a video, without revealing anyone. Because you are not the only one carrying this. You never were.
-        </p>
+
+        <!-- Text column -->
+        <div class="about-text">
+          <p class="eyebrow reveal">Why This Exists</p>
+          <h2 class="section-title reveal d1">Because some things are too heavy to carry alone.</h2>
+          <div class="about-rule reveal d2" aria-hidden="true"></div>
+          <p class="reveal d2">
+            Most of us walk around holding things we have never told anyone. Not because we don't want to — but because we are afraid of being judged, misunderstood, or dismissed. We rehearse conversations we never have. We carry weight that was never meant to be permanent.
+          </p>
+          <p class="reveal d3">
+            KAUSHAL is a space where you can put that weight down. Anonymously. Completely. Without fear. Share a regret, a confession, a question you are ashamed of, something that happened that you have never spoken about. No names. No profiles. No judgment.
+          </p>
+          <p class="reveal d4">
+            I read everything. I think about everything. And when enough weight gathers around a particular kind of human experience, I talk about it — in a video, without revealing anyone. Because you are not the only one carrying this. You never were.
+          </p>
+        </div>
+
+        <!-- Image column -->
+        <div class="about-img-wrap reveal d3" aria-hidden="true">
+          <div class="about-img-glow"></div>
+          <div class="about-img-float">
+            <img src="ksimage.jpg" alt="Kaushal" loading="lazy" draggable="false" />
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1617,7 +1702,7 @@
       </div>
       <div style="text-align:center;margin-top:44px" class="reveal d4">
         <a href="#share" class="btn btn-green" style="margin-right:12px">Share Your Story</a>
-        <a href="#" class="btn btn-outline" rel="noopener noreferrer" aria-label="Subscribe on YouTube">Subscribe on YouTube</a>
+        <a href="https://www.youtube.com/@kaushalranu" class="btn btn-outline" rel="noopener noreferrer" aria-label="Subscribe on YouTube">Subscribe on YouTube</a>
       </div>
     </div>
   </section>
