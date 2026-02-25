@@ -13,7 +13,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
   <style>
     /* =============================================
@@ -1807,12 +1806,6 @@
   <script>
   'use strict';
 
-  /* ── EmailJS ─────────────────────────────────────── */
-  const EJS_KEY  = 'GPHZR-nxb4wSRw5Qq';
-  const EJS_SVC  = 'service_345bz2j';
-  const EJS_TPL  = 'template_1wlqbxo';
-  if (typeof emailjs !== 'undefined') emailjs.init(EJS_KEY);
-
   /* ── Custom cursor (desktop only) ─────────────────── */
   (function() {
     const ring = document.getElementById('curRing');
@@ -2058,18 +2051,40 @@
     const msg      = msgInput.value.trim();
     const category = document.getElementById('msgCategory') ? document.getElementById('msgCategory').value : '';
     const advice   = document.getElementById('adviceToggle') ? document.getElementById('adviceToggle').checked : false;
-    if (!msg)         { showErr('Please write something before sending.'); msgInput.focus(); return; }
+    if (!msg)           { showErr('Please write something before sending.'); msgInput.focus(); return; }
     if (msg.length < 3) { showErr('Your message is too short. Take your time.'); return; }
+
     sendBtn.textContent = 'Sending\u2026';
     sendBtn.disabled    = true;
+
     try {
-      if (typeof emailjs !== 'undefined') {
-        await emailjs.send(EJS_SVC, EJS_TPL, { message: msg, category: category || 'Not specified', wants_perspective: advice ? 'Yes' : 'No' });
-      } else {
-        await new Promise(r => setTimeout(r, 800));
+      const res = await fetch('https://formspree.io/f/mqedwovg', {
+        method:  'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept':        'application/json'
+        },
+        body: JSON.stringify({
+          message:           msg,
+          category:          category || 'Not specified',
+          wants_perspective: advice ? 'Yes' : 'No'
+        })
+      });
+
+      if (!res.ok) {
+        const body = await res.text().catch(() => '');
+        throw new Error('HTTP ' + res.status + (body ? ' — ' + body : ''));
       }
+      msgInput.value = '';
+      msgInput.style.height = '';
+      const catEl = document.getElementById('msgCategory');
+      const advEl = document.getElementById('adviceToggle');
+      if (catEl) catEl.value = '';
+      if (advEl) advEl.checked = false;
+      document.getElementById('charCounter').textContent = '0 / 2000';
       showConfirm();
-    } catch {
+    } catch (err) {
+      console.error('[KAUSHAL] send failed:', err);
       showErr('Something did not go through. Please try again gently.');
       sendBtn.textContent = 'Send Anonymously';
       sendBtn.disabled    = false;
